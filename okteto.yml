@@ -3,6 +3,12 @@ build:
     image: okteto.dev/go-hello-world:1.0.0
     context: .
 
+dependencies:
+  dev:
+    repository:  https://github.com/ifbyol/test-pipeline
+    branch: test-dependencies
+    wait: true
+
 deploy:
   - kubectl apply -f k8s.yml
 
