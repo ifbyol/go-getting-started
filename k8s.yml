@@ -37,11 +37,10 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: hello-world
-  annotations:
-    dev.okteto.com/generate-host: hello-world
 spec:
   rules:
-  - http:
+  - host: "boo.bar.com"
+    http:
       paths:
       - backend:
           service:
