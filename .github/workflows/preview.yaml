@@ -7,17 +7,25 @@ jobs:
   preview:
     runs-on: ubuntu-latest
     steps:
+      - name: checkout
+        uses: actions/checkout@master    
+
       - name: Context
         uses: okteto/context@latest
         with:
           url: ${{secrets.OKTETO_URL}}
           token: ${{ secrets.OKTETO_TOKEN }}
 
-      - name: Deploy preview environment
-        uses: okteto/deploy-preview@latest
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Deploy preview environment
+      #   uses: okteto/deploy-preview@latest
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     name: pr-${{ github.event.number }}-ifbyol
+      #     timeout: 15m
+      #     scope: global
+
+      - name: Okteto test
+        uses: okteto/test@tere/DEV-320-add-log-level
         with:
-          name: pr-${{ github.event.number }}-ifbyol
-          timeout: 15m
-          scope: global
+          tests: unit integration e2e

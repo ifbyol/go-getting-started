@@ -8,6 +8,19 @@ deploy:
     - echo $OKTETO_CURRENT_DEPLOY_BELONGS_TO_PREVIEW
     - kubectl apply -f k8s.yml
 
+test:
+  unit:
+    commands:
+      - echo "this is a unit test"
+
+  integration:
+    commands:
+      - echo "this is an integration test"
+  
+  e2e:
+    commands:
+      - echo "this is an end-to-end test"
+
 dev:
   hello-world:
     image: okteto/golang:1
