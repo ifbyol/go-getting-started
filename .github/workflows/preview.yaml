@@ -7,6 +7,9 @@ jobs:
   preview:
     runs-on: ubuntu-latest
     steps:
+      - name: checkout
+        uses: actions/checkout@master    
+
       - name: Context
         uses: okteto/context@latest
         with:
