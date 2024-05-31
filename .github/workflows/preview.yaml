@@ -27,3 +27,5 @@ jobs:
 
       - name: Okteto test
         uses: okteto/test@tere/DEV-320-add-log-level
+        with:
+          tests: unit
