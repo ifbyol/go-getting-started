@@ -28,5 +28,5 @@ jobs:
       - name: Okteto test
         uses: okteto/test@tere/DEV-320-add-log-level
         with:
-          tests: "unit integration"
-          log-level: debug
+          tests: "unit e2e"
+          log-level: info
