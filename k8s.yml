@@ -18,7 +18,7 @@ spec:
         app: hello-world
     spec:
       containers:
-      - image: okteto.dev/go-getting-started-hello-world:okteto
+      - image: ifbyol/pipeline-runner:go-getting-started
         name: hello-world
         imagePullPolicy: Always
 

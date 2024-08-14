@@ -1,6 +1,7 @@
 build:
   hello-world:
     context: .
+    image: ifbyol/pipeline-runner:go-getting-started
 
 deploy:
   remote: true
