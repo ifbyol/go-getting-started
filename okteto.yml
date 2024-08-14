@@ -8,6 +8,7 @@ deploy:
   commands:
     - echo $OKTETO_CURRENT_DEPLOY_BELONGS_TO_PREVIEW
     - kubectl apply -f k8s.yml
+    - trivy image ifbyol/pipeline-runner:go-getting-started
 
 destroy:
   remote: true
