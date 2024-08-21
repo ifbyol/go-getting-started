@@ -38,12 +38,53 @@ spec:
 
 ---
 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-world2
+  annotations:
+    dev.okteto.com/pre-sleep: "kubectl get pods"
+    dev.okteto.com/post-sleep: "kubectl get deployment"
+    dev.okteto.com/post-wake: "kubectl get all"
+    dev.okteto.com/pre-wake: "kubectl get secret"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-world2
+  template:
+    metadata:
+      labels:
+        app: hello-world2
+    spec:
+      containers:
+      - image: okteto.dev/go-getting-started-hello-world:okteto
+        name: hello-world
+        imagePullPolicy: Always
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-world2
+spec:
+  type: ClusterIP
+  ports:
+  - name: "hello-world"
+    port: 8080
+  selector:
+    app: hello-world2
+
+---
+
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: hello-world
   annotations:
     dev.okteto.com/generate-host: hello-world
+    dev.okteto.com/endpoints: https://hello-world-${OKTETO_NAMESPACE}.${OKTETO_DOMAIN}/hola,https://hello-world-${OKTETO_NAMESPACE}.${OKTETO_DOMAIN}/test
 spec:
   rules:
   - http:
@@ -54,4 +95,11 @@ spec:
             port:
               number: 8080
         path: /
+        pathType: ImplementationSpecific
+      - backend:
+          service:
+            name: hello-world2
+            port:
+              number: 8080
+        path: /test
         pathType: ImplementationSpecific
