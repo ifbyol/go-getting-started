@@ -21,3 +21,4 @@ jobs:
           name: ifbyol-${{ github.event.number }}-pr
           timeout: 15m
           scope: global
+          variables: OKTETO_PR_NUMBER=${{ github.event.number }},OKTETO_PR_COMMIT=${{ github.sha }}
